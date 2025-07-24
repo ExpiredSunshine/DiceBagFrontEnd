@@ -1,4 +1,4 @@
-import './App.css'
+import './App.css';
 
 function App() {
   return (
@@ -7,11 +7,9 @@ function App() {
         <h1>DiceBag</h1>
         <p>True Random Dice Rolling</p>
       </header>
-      <main>
-        {/* Dice rolling components will go here */}
-      </main>
+      <main>{/* Dice rolling components will go here */}</main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
