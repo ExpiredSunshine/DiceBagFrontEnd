@@ -1,23 +1,12 @@
-# DiceBag 🎲
+# React + Vite
 
-A lightweight web application that provides true random dice rolls using atmospheric noise from RANDOM.ORG's API, designed specifically for tabletop gamers who demand authentic randomness in their dice rolling experience.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## 🌟 Why True Randomness Matters
+Currently, two official plugins are available:
 
-Most computer programs use pseudo-random number generators, which are sufficient for general applications but can feel predictable to avid tabletop gamers who roll hundreds or thousands of dice weekly. DiceBag addresses this by fetching true random numbers from RANDOM.ORG's atmospheric-noise API, ensuring every roll maintains the authentic feel of physical dice.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## ✨ Features
+## Expanding the ESLint configuration
 
-### Core Functionality
-- **True Random Dice Rolls**: Powered by RANDOM.ORG's atmospheric noise API
-- **Comprehensive Die Support**: d2 (coin flip) through d100
-- **Flexible Rolling Options**: Individual die rolls or mixed pool batches
-- **User Authentication**: Secure signup/login system with profile management
-- **Trial Mode**: Limited free rolls for new users to experience the application
-
-### User Experience
-- **Profile Management**: Customizable name, email, and avatar
-- **Roll History**: Last 50 rolls with detailed timestamps and results
-- **Batch Rolling**: Roll multiple dice types simultaneously
-- **Quantity Control**: Set specific quantities for each die type
-- **Detailed Results**: Individual die results and totals for every roll
+If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
