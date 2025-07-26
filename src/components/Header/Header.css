@@ -18,7 +18,7 @@
 }
 
 .header__title {
-  color: #ecf0f1;
+  color: #ffffff;
 }
 
 .header__auth-buttons {
@@ -29,16 +29,17 @@
 .header__register-btn,
 .header__signin-btn {
   padding: 0.5rem 1rem;
-  border: 1px solid #3498db;
+  border: 1px solid #4f0000;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.3s ease;
-  background-color: transparent;
-  color: #3498db;
+  background-color: #4f0000;
+  color: #000000;
 }
 
 .header__register-btn:hover,
 .header__signin-btn:hover {
-  background-color: #3498db;
-  color: white;
+  background-color: #4f0000;
+  border: 1px solid #4f0000;
+  color: rgb(255, 255, 255);
 }

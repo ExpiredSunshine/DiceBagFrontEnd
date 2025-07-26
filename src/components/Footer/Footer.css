@@ -1,44 +1,13 @@
 .footer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  padding: 1rem 2rem;
+  height: 100px;
   background-color: #000000;
 }
 
-.footer__logo-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  gap: 0.5rem;
-}
-
-.footer__logo {
-  font-size: 2rem;
-}
-
 .footer__title {
-  color: #ecf0f1;
-}
-
-.footer__auth-buttons {
-  display: flex;
-  gap: 1rem;
-}
-
-.footer__register-btn,
-.footer__signin-btn {
-  padding: 0.5rem 1rem;
-  border: 1px solid #3498db;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background-color: transparent;
-  color: #3498db;
-}
-
-.footer__register-btn:hover,
-.footer__signin-btn:hover {
-  background-color: #3498db;
-  color: white;
+  margin: 0 auto 0 72px;
+  color: #ffffff;
+  font-size: 24px;
 }
