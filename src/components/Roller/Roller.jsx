@@ -1,9 +1,7 @@
-import Main from '../Main/Main';
-
 function Roller() {
   return (
     <div className="roller">
-      <Main />
+      <h2>WIP ROLL PAGE</h2>
     </div>
   );
 }
