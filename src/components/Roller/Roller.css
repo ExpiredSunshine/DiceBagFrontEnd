@@ -24,15 +24,22 @@
   overflow: hidden;
 }
 
+.roll_history__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 30px 20px 30px;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
 .roll_history__title {
   margin: 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  padding: 30px 30px 20px 30px;
   color: white;
   font-size: 1.8rem;
   font-weight: bold;
   text-align: center;
-  flex-shrink: 0;
 }
 
 .roll_history__entries {
@@ -182,6 +189,18 @@
 }
 
 .trash_icon:hover {
+  transform: scale(1.1);
+}
+
+.history_trash {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  filter: brightness(0);
+}
+
+.history_trash:hover {
   transform: scale(1.1);
 }
 

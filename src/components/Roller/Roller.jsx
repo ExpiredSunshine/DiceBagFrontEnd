@@ -140,7 +140,14 @@ function Roller() {
         </div>
 
         <div className="roll_history__section">
-          <h2 className="roll_history__title">Roll History</h2>
+          <div className="roll_history__header">
+            <img
+              src={trashImage}
+              alt="clear history"
+              className="history_trash"
+            />
+            <h2 className="roll_history__title">Roll History</h2>
+          </div>
           <div className="roll_history__entries">
             <div className="roll_history__entry">
               <div className="roll_history__timestamp">2:45 PM</div>
