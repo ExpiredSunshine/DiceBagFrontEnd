@@ -1,12 +1,23 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useState } from 'react';
 import logoImage from '../../assets/images/logo.png';
 import settingsImage from '../../assets/images/Settings.png';
+import RegisterModal from '../RegisterModal/RegisterModal';
 
 import './Header.css';
 
 export default function Header() {
   const location = useLocation();
   const isRollerRoute = location.pathname === '/roller';
+  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+
+  const handleOpenRegisterModal = () => {
+    setIsRegisterModalOpen(true);
+  };
+
+  const handleCloseRegisterModal = () => {
+    setIsRegisterModalOpen(false);
+  };
 
   return (
     <header className="header">
@@ -38,7 +49,11 @@ export default function Header() {
         </div>
       ) : (
         <div className="header__auth-buttons">
-          <button type="button" className="header__register-btn">
+          <button
+            type="button"
+            className="header__register-btn"
+            onClick={handleOpenRegisterModal}
+          >
             register
           </button>
           <button type="button" className="header__signin-btn">
@@ -46,6 +61,11 @@ export default function Header() {
           </button>
         </div>
       )}
+
+      <RegisterModal
+        isOpen={isRegisterModalOpen}
+        onClose={handleCloseRegisterModal}
+      />
     </header>
   );
 }

@@ -1,0 +1,92 @@
+/* RegisterModal specific styles */
+.register-modal__terms {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.register-modal__terms-text {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+  text-align: center;
+}
+
+.register-modal__terms-link {
+  color: #ff6b6b;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.register-modal__terms-link:hover {
+  color: #ff8e8e;
+  text-decoration: underline;
+}
+
+/* Password strength indicator */
+.register-modal__password-strength {
+  margin-top: 5px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.register-modal__strength-bar {
+  height: 4px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 0.2);
+  flex: 1;
+  overflow: hidden;
+}
+
+.register-modal__strength-fill {
+  height: 100%;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.register-modal__strength-weak {
+  background-color: #ff6b6b;
+  width: 25%;
+}
+
+.register-modal__strength-medium {
+  background-color: #ffa726;
+  width: 50%;
+}
+
+.register-modal__strength-strong {
+  background-color: #66bb6a;
+  width: 75%;
+}
+
+.register-modal__strength-very-strong {
+  background-color: #4caf50;
+  width: 100%;
+}
+
+/* Form field spacing adjustments for registration */
+.register-modal .modal__form-group {
+  margin-bottom: 15px;
+}
+
+.register-modal .modal__form-group:last-of-type {
+  margin-bottom: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .register-modal__terms {
+    padding: 12px;
+    margin-top: 12px;
+  }
+
+  .register-modal__terms-text {
+    font-size: 0.85rem;
+  }
+}
