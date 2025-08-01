@@ -10,6 +10,8 @@ import d100Image from '../../../assets/images/d100.png';
 import arrowUp from '../../../assets/images/arrow_up.png';
 import arrowDown from '../../../assets/images/arrow_down.png';
 import trashImage from '../../../assets/images/Trash.png';
+import RollResultModal from '../../RollResultModal/RollResultModal';
+import { rollDice } from '../../../utils/diceRoller';
 
 function DiceCards() {
   // Initialize state for all dice quantities
@@ -71,6 +73,75 @@ function DiceCards() {
     });
   };
 
+  // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [rollData, setRollData] = useState(null);
+  const [isRolling, setIsRolling] = useState(false);
+
+  // Handle roll individual dice card
+  const handleRollCard = async diceType => {
+    const quantity = diceQuantities[diceType];
+    if (quantity === 0) {
+      alert('Please select at least one die to roll!');
+      return;
+    }
+
+    setIsRolling(true);
+    try {
+      // Create a temporary object with only the selected die type
+      const singleDiceQuantities = {
+        d4: 0,
+        d6: 0,
+        d8: 0,
+        d10: 0,
+        d12: 0,
+        d20: 0,
+        d100: 0,
+        [diceType]: quantity,
+      };
+
+      const results = await rollDice(singleDiceQuantities);
+      setRollData(results);
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error('Error rolling dice:', error);
+      alert('Error rolling dice. Please try again.');
+    } finally {
+      setIsRolling(false);
+    }
+  };
+
+  // Handle roll all dice
+  const handleRollAll = async () => {
+    // Check if any dice are selected
+    const totalDice = Object.values(diceQuantities).reduce(
+      (sum, quantity) => sum + quantity,
+      0
+    );
+    if (totalDice === 0) {
+      alert('Please select at least one die to roll!');
+      return;
+    }
+
+    setIsRolling(true);
+    try {
+      const results = await rollDice(diceQuantities);
+      setRollData(results);
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error('Error rolling dice:', error);
+      alert('Error rolling dice. Please try again.');
+    } finally {
+      setIsRolling(false);
+    }
+  };
+
+  // Handle close modal
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setRollData(null);
+  };
+
   // Handle continuous increment/decrement on mouse hold
   const [holdInterval, setHoldInterval] = useState(null);
 
@@ -81,7 +152,7 @@ function DiceCards() {
     // Set up interval for continuous action
     const interval = setInterval(() => {
       action(diceType);
-    }, 100); // Repeat every 100ms
+    }, 200); // Repeat every 200ms
 
     setHoldInterval(interval);
   };
@@ -97,17 +168,30 @@ function DiceCards() {
     <div className="dice_card__section">
       <div className="dice_cards_container">
         {diceConfig.map(dice => (
-          <div key={dice.type} className="dice_card">
+          <div
+            key={dice.type}
+            className={`dice_card ${diceQuantities[dice.type] > 0 ? 'clickable' : ''}`}
+            onClick={() =>
+              diceQuantities[dice.type] > 0 && handleRollCard(dice.type)
+            }
+          >
             <div className="dice_image">
               <img src={dice.image} alt={`${dice.type.toUpperCase()} dice`} />
             </div>
             <div className="dice_label">
-              <div className="dice_card__arrows">
+              <div
+                className="dice_card__arrows"
+                onClick={e => e.stopPropagation()}
+                onMouseDown={e => e.stopPropagation()}
+              >
                 <img
                   src={arrowUp}
                   alt="arrow up"
                   className="up_arrow"
-                  onMouseDown={() => startHold(dice.type, handleIncrease)}
+                  onMouseDown={e => {
+                    e.stopPropagation();
+                    startHold(dice.type, handleIncrease);
+                  }}
                   onMouseUp={stopHold}
                   onMouseLeave={stopHold}
                 />
@@ -115,10 +199,12 @@ function DiceCards() {
                   src={arrowDown}
                   alt="arrow down"
                   className={`down_arrow ${diceQuantities[dice.type] === 0 ? 'disabled' : ''}`}
-                  onMouseDown={() =>
-                    diceQuantities[dice.type] > 0 &&
-                    startHold(dice.type, handleDecrease)
-                  }
+                  onMouseDown={e => {
+                    e.stopPropagation();
+                    if (diceQuantities[dice.type] > 0) {
+                      startHold(dice.type, handleDecrease);
+                    }
+                  }}
                   onMouseUp={stopHold}
                   onMouseLeave={stopHold}
                 />
@@ -130,14 +216,23 @@ function DiceCards() {
                 src={trashImage}
                 alt="delete"
                 className="trash_icon"
-                onClick={() => handleReset(dice.type)}
+                onClick={e => {
+                  e.stopPropagation();
+                  handleReset(dice.type);
+                }}
               />
             </div>
           </div>
         ))}
       </div>
       <div className="roll_section">
-        <button className="roll_button">roll all</button>
+        <button
+          className={`roll_button ${isRolling ? 'rolling' : ''}`}
+          onClick={handleRollAll}
+          disabled={isRolling}
+        >
+          {isRolling ? 'Rolling...' : 'roll all'}
+        </button>
         <img
           src={trashImage}
           alt="clear all"
@@ -145,6 +240,12 @@ function DiceCards() {
           onClick={handleResetAll}
         />
       </div>
+
+      <RollResultModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        rollData={rollData}
+      />
     </div>
   );
 }

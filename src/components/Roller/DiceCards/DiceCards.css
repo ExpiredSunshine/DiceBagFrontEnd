@@ -37,6 +37,20 @@
   border-color: rgba(197, 0, 0, 0.3);
 }
 
+.dice_card.clickable {
+  cursor: pointer;
+}
+
+.dice_card.clickable:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  border-color: #ffd700;
+}
+
+.dice_card.clickable:active {
+  transform: translateY(-2px);
+}
+
 .dice_image {
   height: 200px;
   margin-bottom: 20px;
@@ -139,6 +153,29 @@
   transform: translateY(-5px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
   border-color: rgba(197, 0, 0, 0.3);
+}
+
+.roll_button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.roll_button.rolling {
+  background-color: #5a0000;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .clear_all_icon {
