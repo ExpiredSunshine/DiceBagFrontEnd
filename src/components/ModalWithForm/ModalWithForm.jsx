@@ -14,33 +14,35 @@ function ModalWithForm({
   initialFormData = {},
   onFormDataChange,
   className = '',
+  hideButtons = false,
 }) {
   const [formData, setFormData] = useState(initialFormData);
 
   useModalClose(isOpen, handleCloseClick);
 
-  // Reset form data when modal opens/closes
+  // Reset form data when modal opens
   useEffect(() => {
     if (isOpen) {
       setFormData(initialFormData);
     }
-  }, [isOpen, initialFormData]);
+  }, [isOpen]); // Removed initialFormData dependency
 
   const handleInputChange = e => {
     const { name, value, type, checked } = e.target;
     const newValue = type === 'checkbox' ? checked : value;
 
-    setFormData(prev => ({
-      ...prev,
-      [name]: newValue,
-    }));
-
-    if (onFormDataChange) {
-      onFormDataChange({
-        ...formData,
+    setFormData(prev => {
+      const updatedData = {
+        ...prev,
         [name]: newValue,
-      });
-    }
+      };
+
+      if (onFormDataChange) {
+        onFormDataChange(updatedData);
+      }
+
+      return updatedData;
+    });
   };
 
   const handleSubmit = e => {
@@ -69,24 +71,26 @@ function ModalWithForm({
           {typeof children === 'function'
             ? children(formData, handleInputChange)
             : children}
-          <div className="modal__buttons">
-            <button
-              type="submit"
-              className="modal__submit"
-              disabled={!isFormValid}
-            >
-              {buttonText}
-            </button>
-            {secondaryAction && (
+          {!hideButtons && (
+            <div className="modal__buttons">
               <button
-                type="button"
-                className="modal__secondary-btn"
-                onClick={secondaryAction.onClick}
+                type="submit"
+                className="modal__submit"
+                disabled={!isFormValid}
               >
-                {secondaryAction.text}
+                {buttonText}
               </button>
-            )}
-          </div>
+              {secondaryAction && (
+                <button
+                  type="button"
+                  className="modal__secondary-btn"
+                  onClick={secondaryAction.onClick}
+                >
+                  {secondaryAction.text}
+                </button>
+              )}
+            </div>
+          )}
         </form>
       </div>
     </div>
