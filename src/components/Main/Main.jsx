@@ -1,6 +1,13 @@
 import './Main.css';
+import { useNavigate } from 'react-router-dom';
 
 function Main() {
+  const navigate = useNavigate();
+
+  const handleTryClick = () => {
+    navigate('/roller');
+  };
+
   return (
     <main className="main">
       <p className="main__text">
@@ -21,7 +28,9 @@ function Main() {
         </a>
         .
       </p>
-      <button className="main__button">Try</button>
+      <button className="main__button" onClick={handleTryClick}>
+        Try
+      </button>
     </main>
   );
 }
