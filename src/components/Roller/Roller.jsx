@@ -1,5 +1,5 @@
 import './Roller.css';
-import DiceCards from './DiceCards/index.jsx';
+import DiceCards from './DiceCards/DiceCards.jsx';
 import RollHistory from './RollHistory/index.jsx';
 
 function Roller() {

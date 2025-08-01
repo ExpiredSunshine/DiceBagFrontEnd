@@ -21,11 +21,7 @@ function DiceCards() {
           <div className="dice_label">
             <div className="dice_card__arrows">
               <img src={arrowUp} alt="arrow up" className="up_arrow" />
-              <img
-                src={arrowDown}
-                alt="arrow down"
-                className="down_arrow"
-              />
+              <img src={arrowDown} alt="arrow down" className="down_arrow" />
             </div>
             <h3 className="dice_title">1D4</h3>
             <img src={trashImage} alt="delete" className="trash_icon" />
@@ -38,11 +34,7 @@ function DiceCards() {
           <div className="dice_label">
             <div className="dice_card__arrows">
               <img src={arrowUp} alt="arrow up" className="up_arrow" />
-              <img
-                src={arrowDown}
-                alt="arrow down"
-                className="down_arrow"
-              />
+              <img src={arrowDown} alt="arrow down" className="down_arrow" />
             </div>
             <h3 className="dice_title">1D6</h3>
             <img src={trashImage} alt="delete" className="trash_icon" />
@@ -55,11 +47,7 @@ function DiceCards() {
           <div className="dice_label">
             <div className="dice_card__arrows">
               <img src={arrowUp} alt="arrow up" className="up_arrow" />
-              <img
-                src={arrowDown}
-                alt="arrow down"
-                className="down_arrow"
-              />
+              <img src={arrowDown} alt="arrow down" className="down_arrow" />
             </div>
             <h3 className="dice_title">1D8</h3>
             <img src={trashImage} alt="delete" className="trash_icon" />
@@ -72,11 +60,7 @@ function DiceCards() {
           <div className="dice_label">
             <div className="dice_card__arrows">
               <img src={arrowUp} alt="arrow up" className="up_arrow" />
-              <img
-                src={arrowDown}
-                alt="arrow down"
-                className="down_arrow"
-              />
+              <img src={arrowDown} alt="arrow down" className="down_arrow" />
             </div>
             <h3 className="dice_title">1D10</h3>
             <img src={trashImage} alt="delete" className="trash_icon" />
@@ -89,11 +73,7 @@ function DiceCards() {
           <div className="dice_label">
             <div className="dice_card__arrows">
               <img src={arrowUp} alt="arrow up" className="up_arrow" />
-              <img
-                src={arrowDown}
-                alt="arrow down"
-                className="down_arrow"
-              />
+              <img src={arrowDown} alt="arrow down" className="down_arrow" />
             </div>
             <h3 className="dice_title">1D12</h3>
             <img src={trashImage} alt="delete" className="trash_icon" />
@@ -106,11 +86,7 @@ function DiceCards() {
           <div className="dice_label">
             <div className="dice_card__arrows">
               <img src={arrowUp} alt="arrow up" className="up_arrow" />
-              <img
-                src={arrowDown}
-                alt="arrow down"
-                className="down_arrow"
-              />
+              <img src={arrowDown} alt="arrow down" className="down_arrow" />
             </div>
             <h3 className="dice_title">1D20</h3>
             <img src={trashImage} alt="delete" className="trash_icon" />
@@ -123,11 +99,7 @@ function DiceCards() {
           <div className="dice_label">
             <div className="dice_card__arrows">
               <img src={arrowUp} alt="arrow up" className="up_arrow" />
-              <img
-                src={arrowDown}
-                alt="arrow down"
-                className="down_arrow"
-              />
+              <img src={arrowDown} alt="arrow down" className="down_arrow" />
             </div>
             <h3 className="dice_title">1D100</h3>
             <img src={trashImage} alt="delete" className="trash_icon" />
@@ -139,4 +111,4 @@ function DiceCards() {
   );
 }
 
-export default DiceCards; 
+export default DiceCards;
