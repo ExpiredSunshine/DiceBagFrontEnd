@@ -4,6 +4,7 @@ import logoImage from '../../assets/images/logo.png';
 import settingsImage from '../../assets/images/Settings.png';
 import RegisterModal from '../RegisterModal/RegisterModal';
 import SignInModal from '../SignInModal/SignInModal';
+import SettingsModal from '../SettingsModal/SettingsModal';
 
 import './Header.css';
 
@@ -12,6 +13,7 @@ export default function Header() {
   const isRollerRoute = location.pathname === '/roller';
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
 
   const handleOpenRegisterModal = () => {
     setIsRegisterModalOpen(true);
@@ -27,6 +29,14 @@ export default function Header() {
 
   const handleCloseSignInModal = () => {
     setIsSignInModalOpen(false);
+  };
+
+  const handleOpenSettingsModal = () => {
+    setIsSettingsModalOpen(true);
+  };
+
+  const handleCloseSettingsModal = () => {
+    setIsSettingsModalOpen(false);
   };
 
   return (
@@ -55,6 +65,8 @@ export default function Header() {
             src={settingsImage}
             alt="Settings"
             className="header__settings-icon"
+            onClick={handleOpenSettingsModal}
+            style={{ cursor: 'pointer' }}
           />
         </div>
       ) : (
@@ -83,6 +95,10 @@ export default function Header() {
       <SignInModal
         isOpen={isSignInModalOpen}
         onClose={handleCloseSignInModal}
+      />
+      <SettingsModal
+        isOpen={isSettingsModalOpen}
+        onClose={handleCloseSettingsModal}
       />
     </header>
   );

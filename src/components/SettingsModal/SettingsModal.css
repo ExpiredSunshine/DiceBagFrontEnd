@@ -1,0 +1,17 @@
+/* SettingsModal specific styles */
+
+/* Form field spacing adjustments for settings */
+.settings-modal .modal__form-group {
+  margin-bottom: 18px;
+}
+
+.settings-modal .modal__form-group:last-of-type {
+  margin-bottom: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .settings-modal .modal__form-group {
+    margin-bottom: 15px;
+  }
+}
