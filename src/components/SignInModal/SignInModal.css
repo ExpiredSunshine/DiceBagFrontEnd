@@ -1,0 +1,38 @@
+/* SignInModal specific styles */
+.signin-modal__forgot-password {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.signin-modal__forgot-link {
+  color: #ff6b6b;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.signin-modal__forgot-link:hover {
+  color: #ff8e8e;
+  text-decoration: underline;
+}
+
+/* Form field spacing adjustments for sign in */
+.signin-modal .modal__form-group {
+  margin-bottom: 20px;
+}
+
+.signin-modal .modal__form-group:last-of-type {
+  margin-bottom: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .signin-modal__forgot-password {
+    margin-top: 8px;
+  }
+
+  .signin-modal__forgot-link {
+    font-size: 0.85rem;
+  }
+}

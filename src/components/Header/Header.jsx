@@ -3,6 +3,7 @@ import { useState } from 'react';
 import logoImage from '../../assets/images/logo.png';
 import settingsImage from '../../assets/images/Settings.png';
 import RegisterModal from '../RegisterModal/RegisterModal';
+import SignInModal from '../SignInModal/SignInModal';
 
 import './Header.css';
 
@@ -10,6 +11,7 @@ export default function Header() {
   const location = useLocation();
   const isRollerRoute = location.pathname === '/roller';
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
   const handleOpenRegisterModal = () => {
     setIsRegisterModalOpen(true);
@@ -17,6 +19,14 @@ export default function Header() {
 
   const handleCloseRegisterModal = () => {
     setIsRegisterModalOpen(false);
+  };
+
+  const handleOpenSignInModal = () => {
+    setIsSignInModalOpen(true);
+  };
+
+  const handleCloseSignInModal = () => {
+    setIsSignInModalOpen(false);
   };
 
   return (
@@ -56,7 +66,11 @@ export default function Header() {
           >
             register
           </button>
-          <button type="button" className="header__signin-btn">
+          <button
+            type="button"
+            className="header__signin-btn"
+            onClick={handleOpenSignInModal}
+          >
             sign in
           </button>
         </div>
@@ -65,6 +79,10 @@ export default function Header() {
       <RegisterModal
         isOpen={isRegisterModalOpen}
         onClose={handleCloseRegisterModal}
+      />
+      <SignInModal
+        isOpen={isSignInModalOpen}
+        onClose={handleCloseSignInModal}
       />
     </header>
   );
