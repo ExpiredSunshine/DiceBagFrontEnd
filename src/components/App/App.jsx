@@ -1,9 +1,9 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Header from './components/Header/Header';
-import Main from './components/Main/Main';
-import Roller from './components/Roller/Roller';
-import Footer from './components/Footer/Footer';
+import Header from '../Header/Header';
+import Main from '../Main/Main';
+import Roller from '../Roller/Roller';
+import Footer from '../Footer/Footer';
 
 function App() {
   return (
