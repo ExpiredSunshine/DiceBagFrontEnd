@@ -30,6 +30,10 @@ export const AuthProvider = ({ children }) => {
       .then(data => {
         setCurrentUser(data.user);
         setIsLoggedIn(true);
+        // Redirect to roller route if user is authenticated and on home page
+        if (window.location.pathname === '/') {
+          navigate('/roller');
+        }
       })
       .catch(() => {
         localStorage.removeItem('jwt');
@@ -37,7 +41,7 @@ export const AuthProvider = ({ children }) => {
       .finally(() => {
         setIsAuthChecked(true);
       });
-  }, []);
+  }, [navigate]);
 
   const handleSignUp = async userData => {
     try {
@@ -45,6 +49,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('jwt', data.token);
       setCurrentUser(data.user);
       setIsLoggedIn(true);
+      navigate('/roller'); // Redirect to roller route after successful registration
       return { success: true };
     } catch (error) {
       return {
@@ -60,6 +65,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.setItem('jwt', data.token);
       setCurrentUser(data.user);
       setIsLoggedIn(true);
+      navigate('/roller'); // Redirect to roller route after successful login
       return { success: true };
     } catch (error) {
       return {
