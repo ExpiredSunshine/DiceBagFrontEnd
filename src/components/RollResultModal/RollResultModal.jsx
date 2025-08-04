@@ -3,8 +3,6 @@ import { useEffect } from 'react';
 import { formatRollResults } from '../../utils/diceRoller';
 
 function RollResultModal({ isOpen, onClose, rollData }) {
-  if (!isOpen) return null;
-
   const formattedResults = formatRollResults(rollData);
 
   // Handle escape key press
@@ -30,6 +28,9 @@ function RollResultModal({ isOpen, onClose, rollData }) {
       onClose();
     }
   };
+
+  // Return null AFTER all hooks are called
+  if (!isOpen) return null;
 
   return (
     <div className="roll_result_modal_overlay" onClick={handleOverlayClick}>
