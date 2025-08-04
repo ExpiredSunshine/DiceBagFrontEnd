@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import './RegisterModal.css';
@@ -45,10 +45,10 @@ function RegisterModal({ isOpen, onClose }) {
     }
   };
 
-  const handleFormDataChange = newData => {
+  const handleFormDataChange = useCallback(newData => {
     setFormData(newData);
     setError(''); // Clear error when user types
-  };
+  }, []);
 
   const isFormValid =
     formData.name &&
