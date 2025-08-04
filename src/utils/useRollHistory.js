@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/useAuth';
 import {
   getRollHistory,
   addRollToHistory,
@@ -16,11 +16,6 @@ export const useRollHistory = () => {
   const [rollHistory, setRollHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  // Load history on mount and when login status changes
-  useEffect(() => {
-    loadHistory();
-  }, [isLoggedIn, loadHistory]);
 
   const loadHistory = useCallback(async () => {
     setIsLoading(true);
@@ -72,6 +67,11 @@ export const useRollHistory = () => {
     } finally {
       setIsLoading(false);
     }
+  }, [isLoggedIn]);
+
+  // Load history on mount and when login status changes
+  useEffect(() => {
+    loadHistory();
   }, [isLoggedIn]);
 
   const addRoll = useCallback(
