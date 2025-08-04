@@ -13,7 +13,7 @@ import trashImage from '../../../assets/images/Trash.png';
 import RollResultModal from '../../RollResultModal/RollResultModal';
 import { rollDice } from '../../../utils/diceRoller';
 
-function DiceCards() {
+function DiceCards({ onAddRollToHistory }) {
   // Initialize state for all dice quantities
   const [diceQuantities, setDiceQuantities] = useState({
     d4: 0,
@@ -103,6 +103,11 @@ function DiceCards() {
       const results = await rollDice(singleDiceQuantities);
       setRollData(results);
       setIsModalOpen(true);
+
+      // Add to history
+      if (onAddRollToHistory) {
+        onAddRollToHistory(results);
+      }
     } catch (error) {
       console.error('Error rolling dice:', error);
       alert('Error rolling dice. Please try again.');
@@ -128,6 +133,11 @@ function DiceCards() {
       const results = await rollDice(diceQuantities);
       setRollData(results);
       setIsModalOpen(true);
+
+      // Add to history
+      if (onAddRollToHistory) {
+        onAddRollToHistory(results);
+      }
     } catch (error) {
       console.error('Error rolling dice:', error);
       alert('Error rolling dice. Please try again.');
