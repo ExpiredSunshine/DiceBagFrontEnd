@@ -3,7 +3,14 @@ import './RollHistory.css';
 import trashImage from '../../../assets/images/Trash.png';
 import RollDetailModal from '../../RollDetailModal/RollDetailModal';
 
-function RollHistory({ rollHistory = [], onClearHistory }) {
+function RollHistory({
+  rollHistory = [],
+  onClearHistory,
+  isLoading = false,
+  error = null,
+  historyLimit = 50,
+  isLoggedIn = false,
+}) {
   const [selectedRoll, setSelectedRoll] = useState(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
 
@@ -26,17 +33,23 @@ function RollHistory({ rollHistory = [], onClearHistory }) {
   return (
     <div className="roll_history__section">
       <div className="roll_history__header">
-        <img
-          src={trashImage}
-          alt="clear history"
-          className="history_trash"
-          onClick={handleClearHistory}
-          style={{ cursor: 'pointer' }}
-        />
-        <h2 className="roll_history__title">Roll History</h2>
+        <div className="roll_history__header_top">
+          <img
+            src={trashImage}
+            alt="clear history"
+            className="history_trash"
+            onClick={handleClearHistory}
+            style={{ cursor: 'pointer' }}
+          />
+          <h2 className="roll_history__title">Roll History</h2>
+        </div>
       </div>
       <div className="roll_history__entries">
-        {rollHistory.length === 0 ? (
+        {isLoading ? (
+          <div className="roll_history__loading">Loading history...</div>
+        ) : error ? (
+          <div className="roll_history__error">{error}</div>
+        ) : rollHistory.length === 0 ? (
           <div className="roll_history__empty">no history yet</div>
         ) : (
           rollHistory.map(roll => (

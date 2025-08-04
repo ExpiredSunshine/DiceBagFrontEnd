@@ -13,11 +13,18 @@
 
 .roll_history__header {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px 30px 20px 30px;
+  flex-shrink: 0;
+}
+
+.roll_history__header_top {
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30px 30px 20px 30px;
   gap: 10px;
-  flex-shrink: 0;
+  margin-bottom: 10px;
 }
 
 .roll_history__title {
@@ -86,4 +93,24 @@
 
 .history_trash:hover {
   transform: scale(1.1);
-} 
+}
+
+.roll_history__empty {
+  color: #cccccc;
+  font-style: italic;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.roll_history__loading {
+  color: #cccccc;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.roll_history__error {
+  color: #ff6b6b;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
