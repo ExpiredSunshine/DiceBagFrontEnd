@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/useAuth';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import './SignInModal.css';
 
@@ -32,7 +32,7 @@ function SignInModal({ isOpen, onClose }) {
       } else {
         setError(result.error);
       }
-    } catch (err) {
+    } catch {
       setError('Sign in failed. Please try again.');
     } finally {
       setIsSubmitting(false);

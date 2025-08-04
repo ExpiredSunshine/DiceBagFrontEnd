@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/useAuth';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import './RegisterModal.css';
 
@@ -38,7 +38,7 @@ function RegisterModal({ isOpen, onClose }) {
       } else {
         setError(result.error);
       }
-    } catch (err) {
+    } catch {
       setError('Registration failed. Please try again.');
     } finally {
       setIsSubmitting(false);

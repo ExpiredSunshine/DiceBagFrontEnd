@@ -40,7 +40,7 @@ function ModalWithForm({
       previousFormDataRef.current = formData;
       onFormDataChange(formData);
     }
-  }, [formData]); // Remove onFormDataChange from dependencies to prevent infinite loops
+  }, [formData, onFormDataChange]); // Add onFormDataChange to dependencies
 
   const handleInputChange = useCallback(e => {
     const { name, value, type, checked } = e.target;

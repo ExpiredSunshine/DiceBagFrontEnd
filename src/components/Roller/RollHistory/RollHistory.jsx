@@ -8,8 +8,6 @@ function RollHistory({
   onClearHistory,
   isLoading = false,
   error = null,
-  historyLimit = 50,
-  isLoggedIn = false,
 }) {
   const [selectedRoll, setSelectedRoll] = useState(null);
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);

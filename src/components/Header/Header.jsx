@@ -1,6 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/useAuth';
 import logoImage from '../../assets/images/logo.png';
 import settingsImage from '../../assets/images/Settings.png';
 import RegisterModal from '../RegisterModal/RegisterModal';

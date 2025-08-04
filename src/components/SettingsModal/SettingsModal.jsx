@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../contexts/useAuth';
 import { updateUserProfile } from '../../api/authApi';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import './SettingsModal.css';

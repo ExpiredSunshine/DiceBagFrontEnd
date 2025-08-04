@@ -20,7 +20,7 @@ export const useRollHistory = () => {
   // Load history on mount and when login status changes
   useEffect(() => {
     loadHistory();
-  }, [isLoggedIn]);
+  }, [isLoggedIn, loadHistory]);
 
   const loadHistory = useCallback(async () => {
     setIsLoading(true);
@@ -48,7 +48,7 @@ export const useRollHistory = () => {
             setRollHistory([]);
             return;
           }
-        } catch (serverError) {
+        } catch {
           // Server is not available, clear localStorage
           localStorage.removeItem(LOCAL_STORAGE_KEY);
           localStorage.removeItem(SERVER_TIMESTAMP_KEY);
