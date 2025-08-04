@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import './ModalWithForm.css';
 import useModalClose from '../../utils/useModalClose';
 
@@ -17,6 +17,7 @@ function ModalWithForm({
   hideButtons = false,
 }) {
   const [formData, setFormData] = useState(initialFormData);
+  const previousFormDataRef = useRef(formData);
 
   useModalClose(isOpen, handleCloseClick);
 
@@ -27,26 +28,23 @@ function ModalWithForm({
     }
   }, [isOpen, initialFormData]);
 
-  const handleInputChange = useCallback(
-    e => {
-      const { name, value, type, checked } = e.target;
-      const newValue = type === 'checkbox' ? checked : value;
+  // Call onFormDataChange when formData changes
+  useEffect(() => {
+    if (onFormDataChange && formData !== previousFormDataRef.current) {
+      previousFormDataRef.current = formData;
+      onFormDataChange(formData);
+    }
+  }, [formData, onFormDataChange]);
 
-      setFormData(prev => {
-        const updatedData = {
-          ...prev,
-          [name]: newValue,
-        };
+  const handleInputChange = useCallback(e => {
+    const { name, value, type, checked } = e.target;
+    const newValue = type === 'checkbox' ? checked : value;
 
-        if (onFormDataChange) {
-          onFormDataChange(updatedData);
-        }
-
-        return updatedData;
-      });
-    },
-    [onFormDataChange]
-  );
+    setFormData(prev => ({
+      ...prev,
+      [name]: newValue,
+    }));
+  }, []);
 
   const handleSubmit = e => {
     e.preventDefault();
