@@ -44,7 +44,18 @@ export const rollDice = async diceQuantities => {
     const response = await rollDiceAPI(diceQuantities);
     return response;
   } catch (error) {
-    console.warn('API call failed, using fallback:', error.message);
+    // Check if this is a daily limit exceeded error (409 Conflict)
+    const isDailyLimitExceeded =
+      error.status === 409 ||
+      (error.message && error.message.includes('Daily roll limit exceeded'));
+
+    if (isDailyLimitExceeded) {
+      console.warn(
+        'Daily roll limit exceeded, using fallback random generation'
+      );
+    } else {
+      console.warn('API call failed, using fallback:', error.message);
+    }
 
     // Fallback: generate results locally for each die type
     const results = [];
@@ -58,11 +69,15 @@ export const rollDice = async diceQuantities => {
       }
     }
 
-    return {
+    const fallbackResponse = {
       rolls: results,
       grandTotal,
       timestamp: new Date().toISOString(),
+      fallback: true,
+      isDailyLimitExceeded: isDailyLimitExceeded,
     };
+
+    return fallbackResponse;
   }
 };
 

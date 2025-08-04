@@ -77,6 +77,7 @@ function DiceCards({ onAddRollToHistory }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rollData, setRollData] = useState(null);
   const [isRolling, setIsRolling] = useState(false);
+  const [dailyLimitMessage, setDailyLimitMessage] = useState('');
 
   // Handle roll individual dice card
   const handleRollCard = async diceType => {
@@ -87,6 +88,7 @@ function DiceCards({ onAddRollToHistory }) {
     }
 
     setIsRolling(true);
+    setDailyLimitMessage(''); // Clear any previous message
     try {
       // Create a temporary object with only the selected die type
       const singleDiceQuantities = {
@@ -103,6 +105,13 @@ function DiceCards({ onAddRollToHistory }) {
       const results = await rollDice(singleDiceQuantities);
       setRollData(results);
       setIsModalOpen(true);
+
+      // Check if this was a daily limit exceeded fallback
+      if (results.isDailyLimitExceeded) {
+        setDailyLimitMessage(
+          'Daily limit exceeded. Using fallback pseudo-random generation. Create a free account to enjoy unlimited true random dice rolling!'
+        );
+      }
 
       // Add to history
       if (onAddRollToHistory) {
@@ -129,10 +138,18 @@ function DiceCards({ onAddRollToHistory }) {
     }
 
     setIsRolling(true);
+    setDailyLimitMessage(''); // Clear any previous message
     try {
       const results = await rollDice(diceQuantities);
       setRollData(results);
       setIsModalOpen(true);
+
+      // Check if this was a daily limit exceeded fallback
+      if (results.isDailyLimitExceeded) {
+        setDailyLimitMessage(
+          'Daily limit exceeded. Using fallback pseudo-random generation. Create a free account to enjoy unlimited true random dice rolling!'
+        );
+      }
 
       // Add to history
       if (onAddRollToHistory) {
@@ -150,6 +167,7 @@ function DiceCards({ onAddRollToHistory }) {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setRollData(null);
+    setDailyLimitMessage(''); // Clear message when modal closes
   };
 
   // Handle continuous increment/decrement on mouse hold
@@ -255,6 +273,7 @@ function DiceCards({ onAddRollToHistory }) {
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         rollData={rollData}
+        dailyLimitMessage={dailyLimitMessage}
       />
     </div>
   );

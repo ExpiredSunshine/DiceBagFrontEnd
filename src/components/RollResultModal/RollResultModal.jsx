@@ -2,7 +2,7 @@ import './RollResultModal.css';
 import { useEffect } from 'react';
 import { formatRollResults } from '../../utils/diceRoller';
 
-function RollResultModal({ isOpen, onClose, rollData }) {
+function RollResultModal({ isOpen, onClose, rollData, dailyLimitMessage }) {
   const formattedResults = formatRollResults(rollData);
 
   // Handle escape key press
@@ -42,6 +42,11 @@ function RollResultModal({ isOpen, onClose, rollData }) {
           </button>
         </div>
         <div className="roll_result_modal_content">
+          {dailyLimitMessage && (
+            <div className="roll_result_daily_limit_message">
+              <p>{dailyLimitMessage}</p>
+            </div>
+          )}
           {rollData && rollData.grandTotal !== undefined ? (
             <>
               <div className="roll_result_summary">

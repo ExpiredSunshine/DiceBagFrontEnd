@@ -76,6 +76,12 @@ export const useRollHistory = () => {
 
   const addRoll = useCallback(
     async rollData => {
+      // Defensive check for rollData
+      if (!rollData || !rollData.rolls || !Array.isArray(rollData.rolls)) {
+        console.warn('Invalid rollData provided to addRoll:', rollData);
+        return;
+      }
+
       const formattedRoll = {
         id: Date.now().toString(),
         timestamp: new Date().toISOString(),

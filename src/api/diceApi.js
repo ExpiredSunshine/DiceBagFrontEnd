@@ -19,13 +19,33 @@ const API_BASE_URL =
  * @returns {Promise<Object>} - Roll results from the backend
  */
 export const rollDiceAPI = async diceQuantities => {
+  // Get JWT token if user is logged in
+  const token = localStorage.getItem('jwt');
+  
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+  
+  // Add Authorization header if token exists
+  if (token) {
+    headers['Authorization'] = `Bearer ${token}`;
+  }
+
   const response = await fetch(`${API_BASE_URL}/dice/roll`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify({ diceQuantities }),
   });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => ({}));
+    const error = new Error(
+      errorData.error || `HTTP ${response.status}: ${response.statusText}`
+    );
+    error.status = response.status;
+    error.message = errorData.error || error.message;
+    throw error;
+  }
 
   return response.json();
 };
