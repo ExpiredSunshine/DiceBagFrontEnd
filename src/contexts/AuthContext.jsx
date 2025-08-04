@@ -82,6 +82,10 @@ export const AuthProvider = ({ children }) => {
     navigate('/');
   };
 
+  const updateCurrentUser = updatedUser => {
+    setCurrentUser(updatedUser);
+  };
+
   const value = {
     currentUser,
     isLoggedIn,
@@ -89,6 +93,7 @@ export const AuthProvider = ({ children }) => {
     signUp: handleSignUp,
     signIn: handleSignIn,
     signOut: handleSignOut,
+    updateCurrentUser,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

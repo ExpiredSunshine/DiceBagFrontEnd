@@ -5,7 +5,7 @@ import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import './SettingsModal.css';
 
 function SettingsModal({ isOpen, onClose }) {
-  const { currentUser } = useAuth();
+  const { currentUser, updateCurrentUser } = useAuth();
   const [formData, setFormData] = useState({
     name: currentUser?.name || '',
     email: currentUser?.email || '',
@@ -40,8 +40,8 @@ function SettingsModal({ isOpen, onClose }) {
         token
       );
 
-      // Update the current user in context (you'll need to add this method to AuthContext)
-      // updateCurrentUser(result.user);
+      // Update the current user in context
+      updateCurrentUser(result.user);
 
       onClose();
     } catch (err) {
