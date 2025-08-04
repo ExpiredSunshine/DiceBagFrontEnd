@@ -19,7 +19,13 @@ function ModalWithForm({
   const [formData, setFormData] = useState(initialFormData);
   const previousFormDataRef = useRef(formData);
 
-  useModalClose(isOpen, handleCloseClick);
+  // Stabilize the close handler to prevent infinite re-renders
+  const stableHandleClose = useCallback(() => {
+    setFormData(initialFormData);
+    handleCloseClick();
+  }, [handleCloseClick, initialFormData]);
+
+  useModalClose(isOpen, stableHandleClose);
 
   // Reset form data when modal opens
   useEffect(() => {
@@ -28,13 +34,13 @@ function ModalWithForm({
     }
   }, [isOpen, initialFormData]);
 
-  // Call onFormDataChange when formData changes
+  // Call onFormDataChange when formData changes (only if provided)
   useEffect(() => {
     if (onFormDataChange && formData !== previousFormDataRef.current) {
       previousFormDataRef.current = formData;
       onFormDataChange(formData);
     }
-  }, [formData, onFormDataChange]);
+  }, [formData]); // Remove onFormDataChange from dependencies to prevent infinite loops
 
   const handleInputChange = useCallback(e => {
     const { name, value, type, checked } = e.target;
@@ -53,10 +59,7 @@ function ModalWithForm({
     }
   };
 
-  const handleClose = () => {
-    setFormData(initialFormData);
-    handleCloseClick();
-  };
+  const handleClose = stableHandleClose;
 
   return (
     <div className={`modal ${isOpen && 'modal_opened'}`}>

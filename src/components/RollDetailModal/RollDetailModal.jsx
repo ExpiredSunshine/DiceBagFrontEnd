@@ -1,63 +1,80 @@
-import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import './RollDetailModal.css';
+import { useEffect } from 'react';
 
 function RollDetailModal({ isOpen, onClose, rollData }) {
-  const handleClose = () => {
-    onClose();
+  // Handle escape key press
+  useEffect(() => {
+    const handleEscape = e => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [isOpen, onClose]);
+
+  // Handle overlay click
+  const handleOverlayClick = e => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
   };
 
+  // Return null AFTER all hooks are called
+  if (!isOpen) return null;
+
   return (
-    <ModalWithForm
-      isOpen={isOpen}
-      handleCloseClick={handleClose}
-      title="Roll Details"
-      buttonText=""
-      onSubmit={handleClose}
-      isFormValid={true}
-      className="roll-detail-modal"
-      hideButtons={true}
-    >
-      {() => (
-        <>
+    <div className="roll_detail_modal_overlay" onClick={handleOverlayClick}>
+      <div className="roll_detail_modal">
+        <div className="roll_detail_modal_header">
+          <h2 className="roll_detail_modal_title">Roll Details</h2>
+          <button className="roll_detail_modal_close_button" onClick={onClose}>
+            ×
+          </button>
+        </div>
+        <div className="roll_detail_modal_content">
           {rollData && rollData.details ? (
             <>
-              <div className="roll-detail-modal__header">
-                <div className="roll-detail-modal__timestamp">
+              <div className="roll_detail_modal_summary">
+                <div className="roll_detail_modal_timestamp">
                   {new Date(rollData.timestamp).toLocaleTimeString([], {
                     hour: '2-digit',
                     minute: '2-digit',
                   })}
                 </div>
-                <div className="roll-detail-modal__notation">
+                <div className="roll_detail_modal_notation">
                   {rollData.diceRolled}
                 </div>
-              </div>
-
-              <div className="roll-detail-modal__summary">
-                <div className="roll-detail-modal__total">
+                <div className="roll_detail_modal_total">
                   Total:{' '}
-                  <span className="roll-detail-modal__total-value">
+                  <span className="roll_detail_modal_total_value">
                     {rollData.total}
                   </span>
                 </div>
               </div>
 
               {rollData.details.map((roll, index) => (
-                <div key={index} className="roll-detail-modal__section">
-                  <h3 className="roll-detail-modal__section-title">
+                <div key={index} className="roll_detail_modal_section">
+                  <h3 className="roll_detail_modal_section_title">
                     {roll.quantity}D{roll.diceType.replace('d', '')} - Total:{' '}
                     {roll.total}
                   </h3>
-                  <div className="roll-detail-modal__dice-results">
+                  <div className="roll_detail_modal_dice_results">
                     {roll.results.map((result, resultIndex) => (
                       <div
                         key={resultIndex}
-                        className="roll-detail-modal__die-result"
+                        className="roll_detail_modal_die_result"
                       >
-                        <div className="roll-detail-modal__die-type">
+                        <div className="roll_detail_modal_die_type">
                           d{roll.diceType.replace('d', '')}
                         </div>
-                        <div className="roll-detail-modal__die-number">
+                        <div className="roll_detail_modal_die_number">
                           {result}
                         </div>
                       </div>
@@ -67,13 +84,13 @@ function RollDetailModal({ isOpen, onClose, rollData }) {
               ))}
             </>
           ) : (
-            <div className="roll-detail-modal__error">
+            <div className="roll_detail_modal_error">
               Unable to display roll data
             </div>
           )}
-        </>
-      )}
-    </ModalWithForm>
+        </div>
+      </div>
+    </div>
   );
 }
 
