@@ -22,32 +22,6 @@ const fallbackRoll = (diceType, quantity) => {
   };
 };
 
-// Wrapper to call the secure backend API with fallback
-const rollDiceAPIWrapper = async (diceType, quantity) => {
-  try {
-    // Create dice quantities object with only the requested die type
-    const diceQuantities = {
-      d4: 0,
-      d6: 0,
-      d8: 0,
-      d10: 0,
-      d12: 0,
-      d20: 0,
-      d100: 0,
-      [diceType]: quantity,
-    };
-
-    // Call the secure backend API
-    const response = await rollDiceAPI(diceQuantities);
-
-    // Return the roll result
-    return response.rolls[0];
-  } catch (error) {
-    console.warn('API call failed, using fallback:', error.message);
-    return fallbackRoll(diceType, quantity);
-  }
-};
-
 // Get max value for each die type
 const getMaxValue = diceType => {
   const diceValues = {
@@ -65,28 +39,31 @@ const getMaxValue = diceType => {
 
 // Main rolling function
 export const rollDice = async diceQuantities => {
-  const rollPromises = [];
-  const diceTypes = Object.keys(diceQuantities);
+  try {
+    // Call the secure backend API directly
+    const response = await rollDiceAPI(diceQuantities);
+    return response;
+  } catch (error) {
+    console.warn('API call failed, using fallback:', error.message);
 
-  // Create promises for each die type that has quantity > 0
-  diceTypes.forEach(diceType => {
-    const quantity = diceQuantities[diceType];
-    if (quantity > 0) {
-      rollPromises.push(rollDiceAPIWrapper(diceType, quantity));
+    // Fallback: generate results locally for each die type
+    const results = [];
+    let grandTotal = 0;
+
+    for (const [diceType, quantity] of Object.entries(diceQuantities)) {
+      if (quantity > 0) {
+        const fallbackResult = fallbackRoll(diceType, quantity);
+        results.push(fallbackResult);
+        grandTotal += fallbackResult.total;
+      }
     }
-  });
 
-  // Wait for all rolls to complete
-  const results = await Promise.all(rollPromises);
-
-  // Calculate grand total
-  const grandTotal = results.reduce((sum, result) => sum + result.total, 0);
-
-  return {
-    rolls: results,
-    grandTotal,
-    timestamp: new Date().toISOString(),
-  };
+    return {
+      rolls: results,
+      grandTotal,
+      timestamp: new Date().toISOString(),
+    };
+  }
 };
 
 // Format roll results for display
