@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import './SignInModal.css';
 
@@ -7,25 +8,50 @@ function SignInModal({ isOpen, onClose }) {
     email: '',
     password: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const { signIn } = useAuth();
 
-  const handleSubmit = data => {
-    console.log('Sign in form submitted:', data);
-    // TODO: Add actual sign in functionality
-    onClose();
+  const handleSubmit = async data => {
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      const result = await signIn({
+        email: data.email,
+        password: data.password,
+      });
+
+      if (result.success) {
+        onClose();
+        // Reset form
+        setFormData({
+          email: '',
+          password: '',
+        });
+      } else {
+        setError(result.error);
+      }
+    } catch (err) {
+      setError('Sign in failed. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleFormDataChange = newData => {
     setFormData(newData);
+    setError(''); // Clear error when user types
   };
 
-  const isFormValid = formData.email && formData.password;
+  const isFormValid = formData.email && formData.password && !isSubmitting;
 
   return (
     <ModalWithForm
       isOpen={isOpen}
       handleCloseClick={onClose}
       title="Sign In"
-      buttonText="Sign In"
+      buttonText={isSubmitting ? 'Signing In...' : 'Sign In'}
       onSubmit={handleSubmit}
       isFormValid={isFormValid}
       initialFormData={formData}
@@ -38,6 +64,10 @@ function SignInModal({ isOpen, onClose }) {
     >
       {(formData, handleInputChange) => (
         <>
+          {error && (
+            <div className="modal__error modal__error--global">{error}</div>
+          )}
+
           <div className="modal__form-group">
             <label htmlFor="email" className="modal__label">
               Email Address *

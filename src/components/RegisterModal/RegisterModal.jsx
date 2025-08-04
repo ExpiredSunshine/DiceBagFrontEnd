@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
 import ModalWithForm from '../ModalWithForm/ModalWithForm';
 import './RegisterModal.css';
 
@@ -9,29 +10,59 @@ function RegisterModal({ isOpen, onClose }) {
     password: '',
     avatarUrl: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const { signUp } = useAuth();
 
-  const handleSubmit = data => {
-    console.log('Registration form submitted:', data);
-    // TODO: Add actual registration functionality
-    onClose();
+  const handleSubmit = async data => {
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      const result = await signUp({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+        avatar: data.avatarUrl || '',
+      });
+
+      if (result.success) {
+        onClose();
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          password: '',
+          avatarUrl: '',
+        });
+      } else {
+        setError(result.error);
+      }
+    } catch (err) {
+      setError('Registration failed. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleFormDataChange = newData => {
     setFormData(newData);
+    setError(''); // Clear error when user types
   };
 
   const isFormValid =
     formData.name &&
     formData.email &&
     formData.password &&
-    formData.password.length >= 6;
+    formData.password.length >= 6 &&
+    !isSubmitting;
 
   return (
     <ModalWithForm
       isOpen={isOpen}
       handleCloseClick={onClose}
       title="Create Account"
-      buttonText="Register"
+      buttonText={isSubmitting ? 'Creating...' : 'Register'}
       onSubmit={handleSubmit}
       isFormValid={isFormValid}
       initialFormData={formData}
@@ -44,6 +75,10 @@ function RegisterModal({ isOpen, onClose }) {
     >
       {(formData, handleInputChange) => (
         <>
+          {error && (
+            <div className="modal__error modal__error--global">{error}</div>
+          )}
+
           <div className="modal__form-group">
             <label htmlFor="name" className="modal__label">
               Full Name *
