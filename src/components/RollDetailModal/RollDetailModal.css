@@ -1,11 +1,11 @@
-/* RollDetailModal specific styles */
+/* RollDetailModal specific styles - styled to match RollResultModal */
 .roll-detail-modal__header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
   padding-bottom: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
 .roll-detail-modal__timestamp {
@@ -22,32 +22,31 @@
 }
 
 .roll-detail-modal__summary {
-  display: flex;
-  justify-content: space-between;
+  text-align: center;
   margin-bottom: 25px;
-  padding: 15px;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.roll-detail-modal__total,
-.roll-detail-modal__average {
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
+.roll-detail-modal__total {
+  color: #ffd700;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.roll-detail-modal__total-value,
-.roll-detail-modal__average-value {
-  color: #ff6b6b;
-  font-size: 1.1rem;
+.roll-detail-modal__total-value {
+  color: #ffd700;
+  font-size: 2.5rem;
   font-weight: bold;
-  margin-left: 5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .roll-detail-modal__section {
-  margin-bottom: 25px;
+  margin-bottom: 12px;
 }
 
 .roll-detail-modal__section-title {
@@ -59,24 +58,28 @@
 }
 
 .roll-detail-modal__dice-results {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: 100%;
 }
 
 .roll-detail-modal__die-result {
   background-color: rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  padding: 15px;
+  padding: 12px;
   text-align: center;
-  transition: all 0.3s ease;
+  flex: 1;
+  min-width: 60px;
+  max-width: 120px;
+  transition: all 0.2s ease;
 }
 
 .roll-detail-modal__die-result:hover {
-  background-color: rgba(0, 0, 0, 0.3);
-  border-color: rgba(197, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   transform: translateY(-2px);
+  border-color: rgba(255, 215, 0, 0.3);
 }
 
 .roll-detail-modal__die-type {
@@ -92,12 +95,6 @@
   font-weight: bold;
   margin-bottom: 5px;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.roll-detail-modal__die-percentage {
-  color: #ff6b6b;
-  font-size: 0.9rem;
-  font-weight: 500;
 }
 
 .roll-detail-modal__error {
@@ -119,13 +116,21 @@
   }
 
   .roll-detail-modal__summary {
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
+    padding: 15px;
+  }
+
+  .roll-detail-modal__total,
+  .roll-detail-modal__total-value {
+    font-size: 2rem;
   }
 
   .roll-detail-modal__dice-results {
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-    gap: 10px;
+    gap: 6px;
+  }
+
+  .roll-detail-modal__die-result {
+    min-width: 50px;
+    max-width: 100px;
+    padding: 10px;
   }
 }
