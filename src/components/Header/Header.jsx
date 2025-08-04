@@ -1,5 +1,6 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
 import logoImage from '../../assets/images/logo.png';
 import settingsImage from '../../assets/images/Settings.png';
 import RegisterModal from '../RegisterModal/RegisterModal';
@@ -11,6 +12,8 @@ import './Header.css';
 export default function Header() {
   const location = useLocation();
   const isRollerRoute = location.pathname === '/roller';
+  const { currentUser, isLoggedIn, signOut } = useAuth();
+
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [isSettingsModalOpen, setIsSettingsModalOpen] = useState(false);
@@ -39,6 +42,10 @@ export default function Header() {
     setIsSettingsModalOpen(false);
   };
 
+  const handleSignOut = () => {
+    signOut();
+  };
+
   return (
     <header className="header">
       <div className="header__logo-group">
@@ -51,14 +58,24 @@ export default function Header() {
         </Link>
       </div>
 
-      {isRollerRoute ? (
+      {isLoggedIn && isRollerRoute ? (
         <div className="header__user-section">
-          <span className="header__username">John Doe</span>
+          <span className="header__username">
+            {currentUser?.name || 'User'}
+          </span>
           <div className="header__avatar-container">
             <div className="header__avatar-background"></div>
-            <img src={logoImage} alt="User Avatar" className="header__avatar" />
+            <img
+              src={currentUser?.avatar || logoImage}
+              alt="User Avatar"
+              className="header__avatar"
+            />
           </div>
-          <button type="button" className="header__signout-btn">
+          <button
+            type="button"
+            className="header__signout-btn"
+            onClick={handleSignOut}
+          >
             sign out
           </button>
           <img
