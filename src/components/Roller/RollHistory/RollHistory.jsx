@@ -31,17 +31,16 @@ function RollHistory({
   return (
     <div className="roll_history__section">
       <div className="roll_history__header">
-        <div className="roll_history__header_top">
-          <img
-            src={trashImage}
-            alt="clear history"
-            className="history_trash"
-            onClick={handleClearHistory}
-            style={{ cursor: 'pointer' }}
-          />
-          <h2 className="roll_history__title">Roll History</h2>
-        </div>
+        <img
+          src={trashImage}
+          alt="clear history"
+          className="history_trash"
+          onClick={handleClearHistory}
+          style={{ cursor: 'pointer' }}
+        />
+        <h2 className="roll_history__title">Roll History</h2>
       </div>
+
       <div className="roll_history__entries">
         {isLoading ? (
           <div className="roll_history__loading">Loading history...</div>
