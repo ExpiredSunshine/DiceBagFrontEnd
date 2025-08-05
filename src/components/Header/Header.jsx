@@ -54,7 +54,7 @@ export default function Header() {
             <div className="header__logo-background"></div>
             <img src={logoImage} alt="DiceBag Logo" className="header__logo" />
           </div>
-          <h1 className="header__title">DiceBag</h1>
+          <h1 className="header__title">DICE BAG</h1>
         </Link>
       </div>
 
