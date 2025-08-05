@@ -6,22 +6,9 @@
   max-width: 1920px;
   margin: 0 auto;
   font-family: 'Playfair Display', serif;
-}
-
-.App-header {
-  background-color: #282c34;
-  padding: 2rem;
-  color: white;
-}
-
-.App-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-  font-weight: bold;
-}
-
-.App-header p {
-  margin: 0.5rem 0 0 0;
-  font-size: 1.2rem;
-  opacity: 0.8;
+  background:
+    linear-gradient(140deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%),
+    url('../../assets/images/background_pattern.png') center/cover no-repeat
+      fixed;
+  background-color: #840000;
 }

@@ -29,7 +29,7 @@ function Main() {
         .
       </p>
       <button className="main__button" onClick={handleTryClick}>
-        try for free
+        start rolling for free
       </button>
     </main>
   );
