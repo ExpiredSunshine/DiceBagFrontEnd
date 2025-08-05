@@ -54,7 +54,10 @@ function RollResultModal({ isOpen, onClose, rollData, dailyLimitMessage }) {
                   Total: {rollData.grandTotal}
                 </h3>
                 <p className="roll_result_timestamp">
-                  {new Date(rollData.timestamp).toLocaleString()}
+                  {new Date(rollData.timestamp).toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
                 </p>
               </div>
               <div className="roll_result_details">
