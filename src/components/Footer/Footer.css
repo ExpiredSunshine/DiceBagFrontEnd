@@ -1,0 +1,16 @@
+.footer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100px;
+  background-image: url('../../assets/images/footer_background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.footer__title {
+  margin: 0 auto 0 72px;
+  color: #ffffff;
+  font-size: 20px;
+}

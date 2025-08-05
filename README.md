@@ -1,23 +1,63 @@
-# DiceBag 🎲
+# DiceBag Frontend
 
-A lightweight web application that provides true random dice rolls using atmospheric noise from RANDOM.ORG's API, designed specifically for tabletop gamers who demand authentic randomness in their dice rolling experience.
+A modern React application for true random dice rolling, designed for tabletop gamers who demand authentic randomness in their games.
 
-## 🌟 Why True Randomness Matters
-
-Most computer programs use pseudo-random number generators, which are sufficient for general applications but can feel predictable to avid tabletop gamers who roll hundreds or thousands of dice weekly. DiceBag addresses this by fetching true random numbers from RANDOM.ORG's atmospheric-noise API, ensuring every roll maintains the authentic feel of physical dice.
-
-## ✨ Features
+## 🎲 Features
 
 ### Core Functionality
-- **True Random Dice Rolls**: Powered by RANDOM.ORG's atmospheric noise API
-- **Comprehensive Die Support**: d2 (coin flip) through d100
-- **Flexible Rolling Options**: Individual die rolls or mixed pool batches
-- **User Authentication**: Secure signup/login system with profile management
-- **Trial Mode**: Limited free rolls for new users to experience the application
+
+- **True Random Dice Rolling**: Uses RANDOM.ORG's atmospheric noise-based API for genuine randomness
+- **Multiple Die Types**: Support for d4, d6, d8, d10, d12, d20, and d100
+- **Batch Rolling**: Roll multiple dice of different types simultaneously
+- **Fallback System**: Graceful degradation to pseudo-random generation when API limits are exceeded
 
 ### User Experience
-- **Profile Management**: Customizable name, email, and avatar
-- **Roll History**: Last 50 rolls with detailed timestamps and results
-- **Batch Rolling**: Roll multiple dice types simultaneously
-- **Quantity Control**: Set specific quantities for each die type
-- **Detailed Results**: Individual die results and totals for every roll
+
+- **Responsive Design**: Modern, intuitive interface that works on desktop and mobile
+- **Roll History**: Track and review previous rolls with detailed breakdowns
+- **Individual & Batch Rolling**: Roll individual die types or all selected dice at once
+
+### Authentication & User Management
+
+- **User Registration & Login**: Secure JWT-based authentication
+- **Profile Management**: Update username, email, and avatar
+- **Persistent History**: Logged-in users get extended roll history (200 vs 50 entries)
+- **Settings Modal**: Easy access to account management
+
+### Technical Features
+
+- **Progressive Enhancement**: Works for both authenticated and anonymous users
+- **Error Handling**: Comprehensive error handling with user-friendly messages
+- **Loading States**: Smooth user experience with proper loading indicators
+- **Accessibility**: Keyboard navigation and screen reader support
+
+## 🏗️ Architecture
+
+### Technology Stack
+
+- **React 19.1.0**: Modern React with hooks and functional components
+- **React Router DOM 7.7.1**: Client-side routing
+- **Vite 7.0.4**: Build tool and development server
+
+### Key Components
+
+#### Dice Rolling Engine
+
+- **API Integration**: Direct communication with backend dice service
+- **Fallback System**: Pseudo-random generation when API unavailable
+- **Error Handling**: Graceful degradation with user feedback
+- **Result Formatting**: Consistent display formatting across the app
+
+#### History Management
+
+- **Dual Storage**: Server storage for authenticated users, localStorage for guests
+- **Automatic Sync**: Real-time synchronization between client and server
+- **Limit Management**: Different history limits for different user types
+- **Persistence**: Survives page refreshes and browser sessions
+
+## 📝 License
+
+Copyright © 2025 Andrew Croft
+
+- **Backend API**: [DiceBag Backend](https://github.com/ExpiredSunshine/DiceBagBackEnd)
+- **RANDOM.ORG**: [True Random Number Service](https://www.random.org/)

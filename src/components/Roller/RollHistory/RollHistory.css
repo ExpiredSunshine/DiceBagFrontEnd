@@ -1,0 +1,109 @@
+.roll_history__section {
+  background: url('../../../assets/images/roll_history_background.png')
+    center/contain no-repeat;
+  border-radius: 15px;
+  margin: 75px 75px 0 0;
+  width: 400px;
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.roll_history__header {
+  display: flex;
+  align-items: center;
+  padding: 30px 30px 20px 30px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.roll_history__title {
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  color: white;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.roll_history__entries {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 0 25px 40px 30px;
+  overflow-y: auto;
+  flex: 1;
+  margin: 0 15px 18px 15px;
+  border-radius: 0 0 13px 13px;
+  /* Firefox scrollbar styling */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+}
+
+/* Custom scrollbar styling */
+.roll_history__entries::-webkit-scrollbar {
+  width: 8px;
+}
+
+.roll_history__entries::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.roll_history__entries::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.roll_history__entries::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.roll_history__entry {
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom: 2px solid rgb(0, 0, 0);
+}
+
+.roll_history__timestamp {
+  color: #cccccc;
+  font-size: 0.9rem;
+}
+
+.roll_history__details {
+  font-weight: bold;
+}
+
+.history_trash {
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  filter: brightness(0);
+}
+
+.history_trash:hover {
+  transform: scale(1.1);
+}
+
+.roll_history__empty {
+  color: #cccccc;
+  font-style: italic;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.roll_history__loading {
+  color: #cccccc;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.roll_history__error {
+  color: #ff6b6b;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+}
