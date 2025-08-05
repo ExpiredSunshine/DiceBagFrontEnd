@@ -82,7 +82,7 @@ function SettingsModal({ isOpen, onClose }) {
 
           <div className="modal__form-group">
             <label htmlFor="name" className="modal__label">
-              Full Name *
+              Username *
             </label>
             <input
               type="text"
@@ -91,7 +91,7 @@ function SettingsModal({ isOpen, onClose }) {
               value={formData.name || ''}
               onChange={handleInputChange}
               className="modal__input"
-              placeholder="Enter your full name"
+              placeholder="Enter your username"
               required
             />
           </div>

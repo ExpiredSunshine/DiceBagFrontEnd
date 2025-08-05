@@ -138,7 +138,7 @@ function DiceCards({ onAddRollToHistory }) {
     }
 
     setIsRolling(true);
-    setDailyLimitMessage(''); // Clear any previous message
+    setDailyLimitMessage('');
     try {
       const results = await rollDice(diceQuantities);
       setRollData(results);
@@ -167,7 +167,7 @@ function DiceCards({ onAddRollToHistory }) {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setRollData(null);
-    setDailyLimitMessage(''); // Clear message when modal closes
+    setDailyLimitMessage('');
   };
 
   // Handle continuous increment/decrement on mouse hold

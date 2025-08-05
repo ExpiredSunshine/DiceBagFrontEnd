@@ -2,7 +2,6 @@ import './RollDetailModal.css';
 import { useEffect } from 'react';
 
 function RollDetailModal({ isOpen, onClose, rollData }) {
-  // Handle escape key press
   useEffect(() => {
     const handleEscape = e => {
       if (e.key === 'Escape') {
@@ -19,14 +18,12 @@ function RollDetailModal({ isOpen, onClose, rollData }) {
     };
   }, [isOpen, onClose]);
 
-  // Handle overlay click
   const handleOverlayClick = e => {
     if (e.target === e.currentTarget) {
       onClose();
     }
   };
 
-  // Return null AFTER all hooks are called
   if (!isOpen) return null;
 
   return (

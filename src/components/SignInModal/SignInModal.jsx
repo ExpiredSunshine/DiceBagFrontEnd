@@ -24,7 +24,6 @@ function SignInModal({ isOpen, onClose }) {
 
       if (result.success) {
         onClose();
-        // Reset form
         setFormData({
           email: '',
           password: '',
@@ -41,7 +40,7 @@ function SignInModal({ isOpen, onClose }) {
 
   const handleFormDataChange = useCallback(newData => {
     setFormData(newData);
-    setError(''); // Clear error when user types
+    setError('');
   }, []);
 
   const isFormValid = formData.email && formData.password && !isSubmitting;

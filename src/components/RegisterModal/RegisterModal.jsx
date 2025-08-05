@@ -47,7 +47,7 @@ function RegisterModal({ isOpen, onClose }) {
 
   const handleFormDataChange = useCallback(newData => {
     setFormData(newData);
-    setError(''); // Clear error when user types
+    setError('');
   }, []);
 
   const isFormValid =
