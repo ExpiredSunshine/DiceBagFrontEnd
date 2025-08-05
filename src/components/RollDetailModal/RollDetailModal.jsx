@@ -39,29 +39,25 @@ function RollDetailModal({ isOpen, onClose, rollData }) {
           {rollData && rollData.details ? (
             <>
               <div className="roll_detail_modal_summary">
-                <div className="roll_detail_modal_timestamp">
-                  {new Date(rollData.timestamp).toLocaleTimeString([], {
-                    hour: '2-digit',
-                    minute: '2-digit',
-                  })}
-                </div>
-                <div className="roll_detail_modal_notation">
-                  {rollData.diceRolled}
-                </div>
                 <div className="roll_detail_modal_total">
                   Total:{' '}
                   <span className="roll_detail_modal_total_value">
                     {rollData.total}
                   </span>
                 </div>
+                <div className="roll_detail_modal_notation">
+                  {rollData.diceRolled}
+                </div>
+                <div className="roll_detail_modal_timestamp">
+                  {new Date(rollData.timestamp).toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}
+                </div>
               </div>
 
               {rollData.details.map((roll, index) => (
                 <div key={index} className="roll_detail_modal_section">
-                  <h3 className="roll_detail_modal_section_title">
-                    {roll.quantity}D{roll.diceType.replace('d', '')} - Total:{' '}
-                    {roll.total}
-                  </h3>
                   <div className="roll_detail_modal_dice_results">
                     {roll.results.map((result, resultIndex) => (
                       <div

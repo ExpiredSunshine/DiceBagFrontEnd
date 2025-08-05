@@ -42,23 +42,24 @@
 }
 
 .roll_detail_modal_close_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: none;
   border: none;
   color: white;
   font-size: 2rem;
   cursor: pointer;
-  padding: 0;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: background-color 0.2s ease;
+  padding: 0 0 5px 0;
+  height: 40px;
+  width: 40px;
+  border-radius: 5px;
+  transition: all 0.2s ease;
 }
 
 .roll_detail_modal_close_button:hover {
   background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
 }
 
 .roll_detail_modal_content {
@@ -108,16 +109,9 @@
   margin-bottom: 12px;
 }
 
-.roll_detail_modal_section_title {
-  color: white;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin: 0 0 15px 0;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-}
-
 .roll_detail_modal_dice_results {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 8px;
   width: 100%;
