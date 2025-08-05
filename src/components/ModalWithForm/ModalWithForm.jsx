@@ -19,20 +19,14 @@ function ModalWithForm({
   const [formData, setFormData] = useState(initialFormData);
   const previousFormDataRef = useRef(formData);
 
-  // Stabilize the close handler to prevent infinite re-renders
-  const stableHandleClose = useCallback(() => {
-    setFormData(initialFormData);
-    handleCloseClick();
-  }, [handleCloseClick, initialFormData]);
-
-  useModalClose(isOpen, stableHandleClose);
-
-  // Reset form data when modal opens
+  // Reset form data when modal opens or initialFormData changes
   useEffect(() => {
     if (isOpen) {
       setFormData(initialFormData);
     }
   }, [isOpen, initialFormData]);
+
+  useModalClose(isOpen, handleCloseClick);
 
   // Call onFormDataChange when formData changes (only if provided)
   useEffect(() => {
@@ -40,7 +34,7 @@ function ModalWithForm({
       previousFormDataRef.current = formData;
       onFormDataChange(formData);
     }
-  }, [formData, onFormDataChange]); // Add onFormDataChange to dependencies
+  }, [formData, onFormDataChange]);
 
   const handleInputChange = useCallback(e => {
     const { name, value, type, checked } = e.target;
@@ -59,14 +53,12 @@ function ModalWithForm({
     }
   };
 
-  const handleClose = stableHandleClose;
-
   return (
     <div className={`modal ${isOpen && 'modal_opened'}`}>
       <div className={`modal__content ${className}`}>
         <h2 className="modal__title">{title}</h2>
         <button
-          onClick={handleClose}
+          onClick={handleCloseClick}
           type="button"
           className="modal__close"
           aria-label="Close modal"
