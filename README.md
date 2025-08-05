@@ -59,5 +59,5 @@ A modern React application for true random dice rolling, designed for tabletop g
 
 Copyright © 2025 Andrew Croft
 
-- **Backend API**: [DiceBag Backend](../DiceBagBackEnd/README.md)
-- **RANDOM.ORG**: [True Random Number Service](https://www.random.org)
+- **Backend API**: [DiceBag Backend](https://github.com/ExpiredSunshine/DiceBagBackEnd)
+- **RANDOM.ORG**: [True Random Number Service](https://www.random.org/)
