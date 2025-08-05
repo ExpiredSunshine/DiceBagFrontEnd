@@ -203,9 +203,12 @@ function DiceCards({ onAddRollToHistory }) {
               diceQuantities[dice.type] > 0 && handleRollCard(dice.type)
             }
           >
-            <div className="dice_image">
-              <img src={dice.image} alt={`${dice.type.toUpperCase()} dice`} />
-            </div>
+            <img
+              className="dice_image"
+              src={dice.image}
+              alt={`${dice.type.toUpperCase()} dice`}
+            />
+
             <div className="dice_label">
               <div
                 className="dice_card__arrows"
