@@ -29,7 +29,7 @@ function Main() {
         .
       </p>
       <button className="main__button" onClick={handleTryClick}>
-        Try
+        try for free
       </button>
     </main>
   );
